@@ -38,11 +38,13 @@ def fetch_train_thoughts(m,pcs,batches,name="trainthoughts"):
 	pickle.dump(all_thoughts, open('output/'+name+'.p','wb'))
 
 if __name__ == '__main__':
-
+	print "loading pieces"
 	pcs = multi_training.loadPieces("music")
-
+	print "creating model"
 	m = model.Model([300,300],[100,50], dropout=0.5)
-
+	print "training"
 	multi_training.trainPiece(m, pcs, 10000)
-
+	print "dumping"
 	pickle.dump( m.learned_config, open( "output/final_learned_config.p", "wb" ) )
+	print "generating"
+	gen_adaptive(m, pcs, 10)
