@@ -42,9 +42,8 @@ if __name__ == '__main__':
 	pcs = multi_training.loadPieces("music")
 	print "creating model"
 	m = model.Model([300,300],[100,50], dropout=0.5)
-	print "training"
-	multi_training.trainPiece(m, pcs, 10000)
-	print "dumping"
-	pickle.dump( m.learned_config, open( "output/final_learned_config.p", "wb" ) )
+	m.learned_config=pickle.load(open("output/final_learned_config.p","rb"))
 	print "generating"
-	gen_adaptive(m, pcs, 10)
+	gen_adaptive(m, pcs, 10, name="gen1")
+	gen_adaptive(m, pcs, 10, name="gen2")
+	gen_adaptive(m, pcs, 10, name="gen3")
